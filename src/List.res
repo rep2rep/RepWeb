@@ -1,5 +1,7 @@
 include Belt.List
 
+let t_rpc = Rpc.Datatype.list_
+
 let range = len => {
   let rec helper = len' =>
     switch len' {

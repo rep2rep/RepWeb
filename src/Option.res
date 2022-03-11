@@ -1,5 +1,7 @@
 include Belt.Option
 
+let t_rpc = Rpc.Datatype.option_
+
 let some = x => Some(x)
 let flatten = tt => flatMap(tt, t => t)
 let iter = (x, f) =>

@@ -1,5 +1,7 @@
 type t = bool
 
+let t_rpc: Rpc.Datatype.t<bool>
+
 let not: t => t
 
 let toString: t => string
