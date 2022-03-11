@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+ed ./node_modules/@ryyppy/rescript-promise/package.json <<'ED'
+3a
+"type": "module",
+.
+w
+q
+ED
+
+ed ./node_modules/bs-fetch/package.json <<'ED'
+3a
+"type": "module",
+.
+w
+q
+ED
