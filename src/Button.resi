@@ -8,5 +8,6 @@ let make: (
   ~onClick: ReactEvent.Mouse.t => unit,
   ~style: ReactDOM.Style.t=?,
   ~value: string,
+  ~tooltip: string=?,
   ~enabled: bool=?,
 ) => React.element
