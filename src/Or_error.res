@@ -52,6 +52,12 @@ let flatMap = (t, f) =>
 
 let flatten = tt => flatMap(tt, t => t)
 
+let iter = (t, f) =>
+  switch t {
+  | Ok(a, _) => f(a)
+  | Err(_) => ()
+  }
+
 let okExn = t =>
   switch t {
   | Ok(a, _) => a
