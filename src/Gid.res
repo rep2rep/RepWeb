@@ -33,19 +33,23 @@ module Cmp = Belt.Id.MakeComparable({
 })
 
 module Set = {
-  type key = Cmp.t
+  type elt = Cmp.t
   type id = Cmp.identity
-  type t = Belt.Set.t<key, id>
+  type t = Belt.Set.t<elt, id>
 
   let empty = Belt.Set.make(~id=module(Cmp))
 
   let isEmpty = Belt.Set.isEmpty
   let has = Belt.Set.has
   let add = Belt.Set.add
+  let remove = Belt.Set.remove
   let union = Belt.Set.union
   let intersect = Belt.Set.intersect
+  let size = Belt.Set.size
   let toList = Belt.Set.toList
   let fromList = lst => lst->List.reduce(empty, (t, k) => add(t, k))
+  let toArray = Belt.Set.toArray
+  let fromArray = Belt.Set.fromArray(_, ~id=module(Cmp))
 
   let toJson = t => toList(t)->List.toJson(toJson)
 

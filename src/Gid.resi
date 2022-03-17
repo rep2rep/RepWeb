@@ -11,7 +11,7 @@ let toJson: t => Js.Json.t
 let fromJson: Js.Json.t => Or_error.t<t>
 
 module Set: {
-  type key = t
+  type elt = t
   type t
 
   let toJson: t => Js.Json.t
@@ -19,12 +19,16 @@ module Set: {
 
   let empty: t
   let isEmpty: t => bool
-  let has: (t, key) => bool
-  let add: (t, key) => t
+  let has: (t, elt) => bool
+  let add: (t, elt) => t
+  let remove: (t, elt) => t
   let union: (t, t) => t
   let intersect: (t, t) => t
-  let toList: t => list<key>
-  let fromList: list<key> => t
+  let size: t => int
+  let toList: t => list<elt>
+  let fromList: list<elt> => t
+  let toArray: t => array<elt>
+  let fromArray: array<elt> => t
 }
 
 module Map: {
