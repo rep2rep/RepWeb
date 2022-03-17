@@ -14,6 +14,8 @@ let create = () => {
   value
 }
 
+let combine = ts => ts->Array.reduce(0, (tot, t) => tot * 2 + t)
+
 let toString = t => Int.baseEncode(t, base)
 let fromString = s => Int.baseDecode(s, base)
 
