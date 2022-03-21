@@ -25,6 +25,7 @@ let mapPartial = (t, f) =>
     | None => arr
     }
   )
+let dedup = %raw("a => [...new Set(a)]")
 
 let push = (t, a) => concat(t, [a])
 let pop = t => (t->getUnsafe(t->length - 1), t->slice(~offset=0, ~len=t->length - 1))

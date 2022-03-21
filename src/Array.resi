@@ -11,6 +11,7 @@ let find: (array<'a>, 'a => bool) => option<'a>
 let includes: (array<'a>, 'a) => bool
 let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
 let mapPartial: (array<'a>, 'a => option<'b>) => array<'b>
+let dedup: array<'a> => array<'a>
 
 let push: (array<'a>, 'a) => array<'a>
 let pop: array<'a> => ('a, array<'a>)
