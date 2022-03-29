@@ -131,3 +131,23 @@ let both14: (
   ),
   array<'z> => 'z,
 ) => t<('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n), 'z>
+let both15: (
+  (
+    t<'a, 'z>,
+    t<'b, 'z>,
+    t<'c, 'z>,
+    t<'d, 'z>,
+    t<'e, 'z>,
+    t<'f, 'z>,
+    t<'g, 'z>,
+    t<'h, 'z>,
+    t<'i, 'z>,
+    t<'j, 'z>,
+    t<'k, 'z>,
+    t<'l, 'z>,
+    t<'m, 'z>,
+    t<'n, 'z>,
+    t<'o, 'z>,
+  ),
+  array<'z> => 'z,
+) => t<('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n, 'o), 'z>
