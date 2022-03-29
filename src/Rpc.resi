@@ -85,6 +85,8 @@ module Response: {
   let upon: (t<'a>, 'a => unit) => unit
   let map: (t<'a>, 'a => 'b) => t<'b>
   let flatMap: (t<'a>, 'a => t<'b>) => t<'b>
+  let all: array<t<'a>> => t<array<'a>>
+  let both: ((t<'a>, t<'b>)) => t<('a, 'b)>
 }
 
 type t
