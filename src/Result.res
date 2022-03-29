@@ -18,6 +18,13 @@ let toOption = t =>
   | Error(_) => None
   }
 
+let thenError = (t, err, reduce_errs) => {
+  switch t {
+  | Ok(a) => Error(err)
+  | Error(e) => reduce_errs([e, err])->Error
+  }
+}
+
 let all = (results, reduce_errs) => {
   let oks = []
   let errors = []
@@ -31,6 +38,21 @@ let all = (results, reduce_errs) => {
     Error(reduce_errs(errors))
   } else {
     Ok(oks)
+  }
+}
+
+let allUnit = (results, reduce_errs) => {
+  let errors = []
+  results->Array.forEach(r =>
+    switch r {
+    | Ok(v) => ()
+    | Error(e) => errors->Js.Array2.push(e)->ignore
+    }
+  )
+  if Array.length(errors) !== 0 {
+    Error(reduce_errs(errors))
+  } else {
+    Ok()
   }
 }
 
@@ -99,6 +121,96 @@ let both9 = ((a, b, c, d, e, f, g, h, i), reduce_errs) =>
     Obj.magic(g),
     Obj.magic(h),
     Obj.magic(i),
+  ]
+  ->all(reduce_errs)
+  ->map(Obj.magic)
+
+let both10 = ((a, b, c, d, e, f, g, h, i, j), reduce_errs) =>
+  [
+    Obj.magic(a),
+    Obj.magic(b),
+    Obj.magic(c),
+    Obj.magic(d),
+    Obj.magic(e),
+    Obj.magic(f),
+    Obj.magic(g),
+    Obj.magic(h),
+    Obj.magic(i),
+    Obj.magic(j),
+  ]
+  ->all(reduce_errs)
+  ->map(Obj.magic)
+
+let both11 = ((a, b, c, d, e, f, g, h, i, j, k), reduce_errs) =>
+  [
+    Obj.magic(a),
+    Obj.magic(b),
+    Obj.magic(c),
+    Obj.magic(d),
+    Obj.magic(e),
+    Obj.magic(f),
+    Obj.magic(g),
+    Obj.magic(h),
+    Obj.magic(i),
+    Obj.magic(j),
+    Obj.magic(k),
+  ]
+  ->all(reduce_errs)
+  ->map(Obj.magic)
+
+let both12 = ((a, b, c, d, e, f, g, h, i, j, k, l), reduce_errs) =>
+  [
+    Obj.magic(a),
+    Obj.magic(b),
+    Obj.magic(c),
+    Obj.magic(d),
+    Obj.magic(e),
+    Obj.magic(f),
+    Obj.magic(g),
+    Obj.magic(h),
+    Obj.magic(i),
+    Obj.magic(j),
+    Obj.magic(k),
+    Obj.magic(l),
+  ]
+  ->all(reduce_errs)
+  ->map(Obj.magic)
+
+let both13 = ((a, b, c, d, e, f, g, h, i, j, k, l, m), reduce_errs) =>
+  [
+    Obj.magic(a),
+    Obj.magic(b),
+    Obj.magic(c),
+    Obj.magic(d),
+    Obj.magic(e),
+    Obj.magic(f),
+    Obj.magic(g),
+    Obj.magic(h),
+    Obj.magic(i),
+    Obj.magic(j),
+    Obj.magic(k),
+    Obj.magic(l),
+    Obj.magic(m),
+  ]
+  ->all(reduce_errs)
+  ->map(Obj.magic)
+
+let both14 = ((a, b, c, d, e, f, g, h, i, j, k, l, m, n), reduce_errs) =>
+  [
+    Obj.magic(a),
+    Obj.magic(b),
+    Obj.magic(c),
+    Obj.magic(d),
+    Obj.magic(e),
+    Obj.magic(f),
+    Obj.magic(g),
+    Obj.magic(h),
+    Obj.magic(i),
+    Obj.magic(j),
+    Obj.magic(k),
+    Obj.magic(l),
+    Obj.magic(m),
+    Obj.magic(n),
   ]
   ->all(reduce_errs)
   ->map(Obj.magic)
