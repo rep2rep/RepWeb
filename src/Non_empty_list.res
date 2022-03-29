@@ -32,6 +32,8 @@ let rec toList = t =>
   | Cons(x, xs) => list{x, ...toList(xs)}
   }
 
+let fromArray = xs => List.fromArray(xs)->fromList
+
 let rec toArray = t =>
   switch t {
   | Singleton(x) => [x]

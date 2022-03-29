@@ -7,6 +7,7 @@ let toList: t<'a> => list<'a>
 let fromList: list<'a> => option<t<'a>>
 
 let toArray: t<'a> => array<'a>
+let fromArray: array<'a> => option<t<'a>>
 
 let singleton: 'a => t<'a>
 let cons: (t<'a>, 'a) => t<'a>
