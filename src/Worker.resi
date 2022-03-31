@@ -10,6 +10,9 @@ module type Intf = {
 
   module WorkerThread: {
     @inline let create: (request => response) => unit
+
+    @inline let listen: (request => unit) => unit
+    @inline let respond: response => unit
   }
 }
 

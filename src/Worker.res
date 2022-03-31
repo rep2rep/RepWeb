@@ -10,6 +10,9 @@ module type Intf = {
 
   module WorkerThread: {
     let create: (request => response) => unit
+
+    let listen: (request => unit) => unit
+    let respond: response => unit
   }
 }
 
@@ -54,17 +57,12 @@ module Make: (Request: Request_Intf, Response: Response_Intf) =>
     @val external this: this = "this"
     @set external onmessage: (this, message => unit) => unit = "onmessage"
     @val external postMessage: string => unit = "postMessage"
+
     @inline
-    let create = callback =>
-      this->onmessage(msg =>
-        msg
-        ->data
-        ->Js.Json.parseExn
-        ->Request.fromJson
-        ->Or_error.iter(request => {
-          let resp = request->callback->Response.toJson->Js.Json.stringify
-          postMessage(resp)
-        })
-      )
+    let listen = callback =>
+      this->onmessage(msg => msg->data->Js.Json.parseExn->Request.fromJson->Or_error.iter(callback))
+    @inline let respond = response => response->Response.toJson->Js.Json.stringify->postMessage
+
+    @inline let create = callback => listen(request => request->callback->respond)
   }
 }

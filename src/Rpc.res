@@ -538,8 +538,9 @@ module Response = {
     )
 
   let opt_all = xs =>
-      xs->Belt.Array.reduce(Some([]), (ys, x) =>
-ys->Belt.Option.flatMap(ys => x->Belt.Option.map(x => Belt.Array.concat(ys, [x]))))
+    xs->Belt.Array.reduce(Some([]), (ys, x) =>
+      ys->Belt.Option.flatMap(ys => x->Belt.Option.map(x => Belt.Array.concat(ys, [x])))
+    )
   let all = ts => Promise.all(ts)->Promise.thenResolve(ts => opt_all(ts))
 
   let both = ((a, b)) => a->flatMap(a => b->map(b => (a, b)))
