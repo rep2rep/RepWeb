@@ -6,6 +6,7 @@ module type Intf = {
   let create: string => t
   let listen: (t, response => unit) => unit
   let post: (t, request) => unit
+  let terminate: t => unit
 
   module WorkerThread: {
     let create: (request => response) => unit
@@ -46,6 +47,7 @@ module Make: (Request: Request_Intf, Response: Response_Intf) =>
     let req = Request.toJson(request)->Js.Json.stringify
     t->postMessage(req)
   }
+  @send external terminate: t => unit = "terminate"
 
   module WorkerThread = {
     type this
