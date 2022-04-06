@@ -235,3 +235,25 @@ let both15 = ((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o), reduce_errs) =>
   ]
   ->all(reduce_errs)
   ->map(Obj.magic)
+
+let both16 = ((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p), reduce_errs) =>
+  [
+    Obj.magic(a),
+    Obj.magic(b),
+    Obj.magic(c),
+    Obj.magic(d),
+    Obj.magic(e),
+    Obj.magic(f),
+    Obj.magic(g),
+    Obj.magic(h),
+    Obj.magic(i),
+    Obj.magic(j),
+    Obj.magic(k),
+    Obj.magic(l),
+    Obj.magic(m),
+    Obj.magic(n),
+    Obj.magic(o),
+    Obj.magic(p),
+  ]
+  ->all(reduce_errs)
+  ->map(Obj.magic)
