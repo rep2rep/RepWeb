@@ -1,5 +1,7 @@
 include Js.String2
 
+module Map = Belt.Map.String
+
 let t_rpc = Rpc.Datatype.string_
 
 let toJson = Js.Json.string
