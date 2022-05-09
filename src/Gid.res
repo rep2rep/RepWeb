@@ -77,6 +77,7 @@ module Map = {
   let merge = Belt.Map.merge
   let keys = Belt.Map.keysToArray
   let values = Belt.Map.valuesToArray
+  let mapPartial = (t, f) => Belt.Map.merge(t, empty(), (k, v, _) => v->Option.flatMap(v => f(k, v)))
 
   let toList = Belt.Map.toList
   let fromList = lst => lst->List.reduce(empty(), (t, (k, v)) => set(t, k, v))
