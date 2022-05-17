@@ -9,7 +9,7 @@ let fromJson = j =>
   j->Js.Json.decodeString->Or_error.fromOption_ss(["Not a JSON string: ", make(j)])
 
 let approxWidths = Belt.Map.String.fromArray([
-  (" ", 0.2),
+  (" ", 0.3),
   ("!", 0.33),
   (".", 0.33),
   (",", 0.33),
@@ -56,10 +56,10 @@ let approxWidths = Belt.Map.String.fromArray([
   ("f", 0.33),
   ("g", 0.66),
   ("h", 0.66),
-  ("i", 0.15),
-  ("j", 0.15),
+  ("i", 0.25),
+  ("j", 0.25),
   ("k", 0.66),
-  ("l", 0.10),
+  ("l", 0.25),
   ("m", 1.00),
   ("n", 0.66),
   ("o", 0.66),
@@ -67,7 +67,7 @@ let approxWidths = Belt.Map.String.fromArray([
   ("q", 0.66),
   ("r", 0.40),
   ("s", 0.66),
-  ("t", 0.20),
+  ("t", 0.33),
   ("u", 0.66),
   ("v", 0.65),
   ("w", 0.90),
