@@ -30,6 +30,9 @@ module KeyBinding = {
     t.meta == e["metaKey"] &&
     t.alt == e["altKey"] &&
     t.key == e["key"]->String.toUpperCase
+
+  @val external platform: string = "navigator.platform"
+  let cmdOrCtrl = () => if platform->String.toLowerCase->String.includes("mac") { "Cmd" } else { "Ctrl" }
 }
 
 type t<'a> = {mutable f: 'a => unit}
