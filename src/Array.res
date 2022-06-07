@@ -26,6 +26,11 @@ let mapPartial = (t, f) =>
     }
   )
 let dedup = %raw("a => [...new Set(a)]")
+let splitAt = (t, x) => {
+  let before = t->slice(~offset=0, ~len=x)
+  let after = t->sliceToEnd(x)
+  (before, after)
+}
 
 let push = (t, a) => concat(t, [a])
 let pop = t => (t->getUnsafe(t->length - 1), t->slice(~offset=0, ~len=t->length - 1))
