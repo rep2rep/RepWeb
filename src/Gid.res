@@ -16,6 +16,14 @@ let create = () => {
 
 let combine = ts => ts->Array.reduce(0, (tot, t) => tot * 2 + t)
 
+let compare = (t, t') => if t === t' {
+  0
+} else if t < t' {
+  -1
+} else {
+  1
+}
+
 let toString = t => Int.baseEncode(t, base)
 let fromString = s => Int.baseDecode(s, base)
 
@@ -48,6 +56,7 @@ module Set = {
   let union = Belt.Set.union
   let intersect = Belt.Set.intersect
   let size = Belt.Set.size
+  let subset = Belt.Set.subset
   let toList = Belt.Set.toList
   let fromList = lst => lst->List.reduce(empty, (t, k) => add(t, k))
   let toArray = Belt.Set.toArray
