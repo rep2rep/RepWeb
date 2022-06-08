@@ -5,7 +5,7 @@ type t<'a> = {
   future: BoundedArray.t<(float, 'a)>,
 }
 
-let history_limit = 50
+let history_limit = 150
 let coalesce_limit = 200.0
 
 type performance
