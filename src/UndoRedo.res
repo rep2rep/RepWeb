@@ -22,6 +22,16 @@ let state = t => t.state
 let canUndo = t => t.past->BoundedArray.isEmpty->Bool.not
 let canRedo = t => t.future->BoundedArray.isEmpty->Bool.not
 
+let replace = (~updateTime=false, t, newState) => {
+  ...t,
+  state: newState,
+  stepped_at: if updateTime {
+    perfNow(performance)
+  } else {
+    t.stepped_at
+  }
+}
+
 let step = (t, newState) => {
   let now = perfNow(performance)
   let last_step = t.stepped_at
