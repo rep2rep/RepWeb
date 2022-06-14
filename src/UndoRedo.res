@@ -29,7 +29,7 @@ let replace = (~updateTime=false, t, newState) => {
     perfNow(performance)
   } else {
     t.stepped_at
-  }
+  },
 }
 
 let step = (t, newState) => {

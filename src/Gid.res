@@ -16,13 +16,14 @@ let create = () => {
 
 let combine = ts => ts->Array.reduce(0, (tot, t) => tot * 2 + t)
 
-let compare = (t, t') => if t === t' {
-  0
-} else if t < t' {
-  -1
-} else {
-  1
-}
+let compare = (t, t') =>
+  if t === t' {
+    0
+  } else if t < t' {
+    -1
+  } else {
+    1
+  }
 
 let toString = t => Int.baseEncode(t, base)
 let fromString = s => Int.baseDecode(s, base)
@@ -87,7 +88,8 @@ module Map = {
   let keys = Belt.Map.keysToArray
   let values = Belt.Map.valuesToArray
   let size = Belt.Map.size
-  let mapPartial = (t, f) => Belt.Map.merge(t, empty(), (k, v, _) => v->Option.flatMap(v => f(k, v)))
+  let mapPartial = (t, f) =>
+    Belt.Map.merge(t, empty(), (k, v, _) => v->Option.flatMap(v => f(k, v)))
 
   let toList = Belt.Map.toList
   let fromList = lst => lst->List.reduce(empty(), (t, (k, v)) => set(t, k, v))
