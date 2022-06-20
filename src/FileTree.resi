@@ -1,5 +1,12 @@
 type t<'a>
 
+module Path: {
+  type t
+
+  let root: t
+  let extend: (t, Gid.t) => t
+}
+
 let empty: unit => t<'a>
 
 let isEmpty: t<'a> => bool
@@ -7,24 +14,18 @@ let isEmpty: t<'a> => bool
 let map: (t<'a>, 'a => 'b) => t<'b>
 let flatten: t<'a> => array<'a>
 
-let insertFile: (t<'a>, ~path: array<Gid.t>, ~position: int, 'a) => option<t<'a>>
+let insertFile: (t<'a>, ~path: Path.t, ~position: int, 'a) => option<t<'a>>
 let removeFile: (t<'a>, 'a => bool) => t<'a>
 
-let newFolder: (
-  t<'a>,
-  ~path: array<Gid.t>,
-  ~position: int,
-  ~name: string,
-  ~id: Gid.t,
-) => option<t<'a>>
+let newFolder: (t<'a>, ~path: Path.t, ~position: int, ~name: string, ~id: Gid.t) => option<t<'a>>
 let folderIsEmpty: (t<'a>, Gid.t) => option<bool>
 let folderContents: (t<'a>, Gid.t) => option<t<'a>>
 let renameFolder: (t<'a>, Gid.t, string) => t<'a>
 let removeFolder: (t<'a>, Gid.t) => t<'a>
 let removeFolderAndContents: (t<'a>, Gid.t) => (t<'a>, array<'a>)
 
-let getFilePathAndPosition: (t<'a>, 'a => bool) => option<(array<Gid.t>, int)>
-let getFolderPathAndPosition: (t<'a>, Gid.t) => option<(array<Gid.t>, int)>
+let getFilePathAndPosition: (t<'a>, 'a => bool) => option<(Path.t, int)>
+let getFolderPathAndPosition: (t<'a>, Gid.t) => option<(Path.t, int)>
 
 module FileOrFolder: {
   type t<'a> =
@@ -33,8 +34,8 @@ module FileOrFolder: {
     | EndFolder(string, Gid.t)
 }
 
-let asPaths: t<'a> => array<FileOrFolder.t<'a>>
-let fromPaths: array<FileOrFolder.t<'a>> => t<'a>
+let asFlat: t<'a> => array<FileOrFolder.t<'a>>
+let fromFlat: array<FileOrFolder.t<'a>> => t<'a>
 
 module Stable: {
   module V1: {

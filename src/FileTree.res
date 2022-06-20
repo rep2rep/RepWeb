@@ -90,6 +90,13 @@ module Stable = {
   }
 }
 
+module Path = {
+  type t = array<Gid.t>
+
+  let root = []
+  let extend = (t, id) => Array.concat(t, [id])
+}
+
 module FileOrFolder = {
   type t<'a> =
     | File('a)
@@ -97,7 +104,7 @@ module FileOrFolder = {
     | EndFolder(string, Gid.t)
 }
 
-let asPaths = t => {
+let asFlat = t => {
   let rec flatten' = t' =>
     switch t' {
     | File(t'') => [FileOrFolder.File(t'')]
@@ -113,7 +120,7 @@ let asPaths = t => {
 
 let flatten = t =>
   t
-  ->asPaths
+  ->asFlat
   ->Array.keepMap(f =>
     switch f {
     | FileOrFolder.File(v) => Some(v)
@@ -121,7 +128,7 @@ let flatten = t =>
     }
   )
 
-let rec fromPaths_helper = (nodes, idx) => {
+let rec fromFlat_helper = (nodes, idx) => {
   let folder = []
   let stop = ref(false)
   let i = ref(idx)
@@ -133,7 +140,7 @@ let rec fromPaths_helper = (nodes, idx) => {
         i := i.contents + 1
       }
     | FileOrFolder.Folder(name, id) => {
-        let (contents, i') = fromPaths_helper(nodes, i.contents + 1)
+        let (contents, i') = fromFlat_helper(nodes, i.contents + 1)
         folder->Js.Array2.push(Folder(name, id, contents))->ignore
         i := i'
       }
@@ -146,7 +153,7 @@ let rec fromPaths_helper = (nodes, idx) => {
   (folder, i.contents)
 }
 
-let fromPaths = paths => fromPaths_helper(paths, 0)->fst
+let fromFlat = paths => fromFlat_helper(paths, 0)->fst
 
 let empty = () => []
 
