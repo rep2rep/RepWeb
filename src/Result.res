@@ -20,7 +20,7 @@ let toOption = t =>
 
 let thenError = (t, err, reduce_errs) => {
   switch t {
-  | Ok(a) => Error(err)
+  | Ok(_) => Error(err)
   | Error(e) => reduce_errs([e, err])->Error
   }
 }
@@ -45,7 +45,7 @@ let allUnit = (results, reduce_errs) => {
   let errors = []
   results->Array.forEach(r =>
     switch r {
-    | Ok(v) => ()
+    | Ok(_) => ()
     | Error(e) => errors->Js.Array2.push(e)->ignore
     }
   )
