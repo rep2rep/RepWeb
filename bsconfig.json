@@ -20,6 +20,7 @@
   "bs-dependencies": [
     "@rescript/react",
     "@ryyppy/rescript-promise",
-    "bs-fetch"
+    "bs-fetch",
+    "rescript-react-draggable-list"
   ]
 }
