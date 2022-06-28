@@ -2,6 +2,8 @@ include Belt.Int
 
 let t_rpc = Rpc.Datatype.int_
 
+let hash = Hash.fromInt
+
 @send external baseEncode: (int, int) => string = "toString"
 @val external baseDecode: (string, int) => int = "parseInt"
 

@@ -2,6 +2,8 @@ include module type of Belt.Option
 
 let t_rpc: Rpc.Datatype.t<'a> => Rpc.Datatype.t<option<'a>>
 
+let hash: (option<'a>, 'a => Hash.t) => Hash.t
+
 let toJson: (option<'a>, 'a => Js.Json.t) => Js.Json.t
 let fromJson: (Js.Json.t, Js.Json.t => Or_error.t<'a>) => Or_error.t<option<'a>>
 

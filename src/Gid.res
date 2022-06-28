@@ -25,6 +25,8 @@ let compare = (t, t') =>
     1
   }
 
+let hash = Hash.fromInt
+
 let toString = t => Int.baseEncode(t, base)
 let fromString = s => Int.baseDecode(s, base)
 

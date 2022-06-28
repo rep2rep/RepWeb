@@ -2,6 +2,8 @@ type t
 
 let t_rpc: Rpc.Datatype.t<t>
 
+let hash: t => Hash.t
+
 let create: unit => t
 let combine: array<t> => t
 let compare: (t, t) => int

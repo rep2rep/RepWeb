@@ -2,6 +2,14 @@ include Belt.Option
 
 let t_rpc = Rpc.Datatype.option_
 
+let none_hash = Hash.unique()
+let some_hash = Hash.unique()
+let hash = (t, f) =>
+  switch t {
+  | None => none_hash
+  | Some(a) => [some_hash, f(a)]->Hash.combine
+  }
+
 let some = x => Some(x)
 let flatten = tt => flatMap(tt, t => t)
 let iter = (x, f) =>

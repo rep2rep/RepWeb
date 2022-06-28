@@ -2,6 +2,8 @@ include module type of Belt.Int
 
 let t_rpc: Rpc.Datatype.t<int>
 
+let hash: int => Hash.t
+
 let toJson: int => Js.Json.t
 let fromJson: Js.Json.t => Or_error.t<int>
 

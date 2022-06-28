@@ -2,6 +2,8 @@ type t = bool
 
 let t_rpc: Rpc.Datatype.t<bool>
 
+let hash: t => Hash.t
+
 let not: t => t
 
 let toString: t => string
