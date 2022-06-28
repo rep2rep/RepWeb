@@ -1,5 +1,7 @@
 type t<'a>
 
+let hash: (t<'a>, 'a => Hash.t) => Hash.t
+
 module Path: {
   type t
 

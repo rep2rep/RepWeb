@@ -3,6 +3,16 @@ type rec inner<'a> =
   | Folder(string, Gid.t, array<inner<'a>>)
 type t<'a> = array<inner<'a>>
 
+let file_const = Hash.unique()
+let folder_const = Hash.unique()
+let rec hash_inner = (i, f) =>
+  switch i {
+  | File(a) => Hash.combine([file_const, f(a)])
+  | Folder(name, id, is) =>
+    Hash.combine([folder_const, String.hash(name), Gid.hash(id), Array.hash(is, hash_inner(_, f))])
+  }
+let hash = (t, f) => Array.hash(t, hash_inner(_, f))
+
 module Stable = {
   module V1 = {
     type t<'a> = array<'a>
