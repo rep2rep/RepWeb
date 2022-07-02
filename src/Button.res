@@ -28,3 +28,5 @@ let make = (~onClick, ~style as givenStyle=?, ~value, ~tooltip as title=?, ~enab
   }
   <input type_={"button"} value onClick style disabled={!enabled} ?title />
 }
+
+let make = React.memo(make)
