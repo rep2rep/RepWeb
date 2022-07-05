@@ -10,9 +10,13 @@ let create = () => {
 }
 
 let two = BigInt0.fromInt(2)
+let six = BigInt0.fromInt(6)
 let thirtytwo = BigInt0.fromInt(32)
+let rnd = BigInt0.fromInt(2654435769)
 
-let combine = ts => ts->Js.Array2.reduce((a, b) => BigInt0.add(BigInt0.mul(a, two), b), BigInt0.zero)
+let merge = (t1, t2) => BigInt0.bitxor(t1, t2->BigInt0.add(rnd)->BigInt0.add(BigInt0.bitshiftleft(t1, six))->BigInt0.add(BigInt0.bitshiftright(t1, two)))
+let combine = ts =>
+  ts->Js.Array2.reduce(merge, BigInt0.zero)
 
 let s_const = create()
 let fromString = s =>
