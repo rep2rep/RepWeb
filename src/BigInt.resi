@@ -1,5 +1,6 @@
 type t
 
+let hash: t => Hash.t
 let fromInt: int => t
 let fromString: string => t
 

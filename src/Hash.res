@@ -1,22 +1,25 @@
-type t = int
+type t = BigInt0.t
 
-type internal = {mutable counter: int}
+type internal = {mutable counter: BigInt0.t}
 
-let internal = {counter: Js.Date.now()->Belt.Float.toInt}
+let internal = {counter: Js.Date.now()->Belt.Float.toInt->mod(1000)->BigInt0.fromInt}
 let create = () => {
   let value = internal.counter
-  internal.counter = internal.counter + 1
+  internal.counter = BigInt0.inc(internal.counter)
   value
 }
 
-let combine = ts => ts->Js.Array2.reduce((a, b) => 2 * a + b, 0)
+let two = BigInt0.fromInt(2)
+let thirtytwo = BigInt0.fromInt(32)
+
+let combine = ts => ts->Js.Array2.reduce((a, b) => BigInt0.add(BigInt0.mul(a, two), b), BigInt0.zero)
 
 let s_const = create()
 let fromString = s =>
   s
   ->Js.String2.split("")
   ->Js.Array2.reduce(
-    (hash, chr) => hash * 31 + chr->Js.String2.charCodeAt(0)->Belt.Int.fromFloat,
+    (hash, chr) => hash->BigInt0.mul(thirtytwo)->BigInt0.add( chr->Js.String2.charCodeAt(0)->Belt.Int.fromFloat->BigInt0.fromInt),
     s_const,
   )
 
@@ -160,8 +163,10 @@ let record11 = (
     ]->combine
 }
 
-let fromInt = i => i
-let fromFloat = f => Belt.Int.fromFloat(f)
-let fromArray = (arr, f) => arr->Belt.Array.map(f)->combine
+let fromBigInt = b => b
+let fromInt = i => i->BigInt0.fromInt
+let fromFloat = f => f->Belt.Float.toString->fromString
+let arr_hash = create()
+let fromArray = (arr, f) => [arr_hash, arr->Belt.Array.map(f)->combine]->combine
 
 let unique = create

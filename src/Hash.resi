@@ -5,6 +5,7 @@ let combine: array<t> => t
 
 let fromString: string => t
 let fromInt: int => t
+let fromBigInt: BigInt0.t => t
 let fromFloat: float => t
 let fromArray: (array<'a>, 'a => t) => t
 
