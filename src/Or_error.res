@@ -106,6 +106,9 @@ let rec all = ts =>
     }
   }
 
+let allArray = ts =>
+  ts->Belt.Array.reduce(Ok([], []), (ys, x) => both((ys, x))->map(((ys, x)) => Belt.Array.concat(ys, [x])))
+
 let rec allUnit = ts =>
   switch ts {
   | list{} => Ok((), [])

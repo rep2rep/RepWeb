@@ -46,6 +46,7 @@ let flatten: t<t<'a>> => t<'a>
 let iter: (t<'a>, 'a => unit) => unit
 
 let all: list<t<'a>> => t<list<'a>>
+let allArray: array<t<'a>> => t<array<'a>>
 let allUnit: list<t<unit>> => t<unit>
 let both: ((t<'a>, t<'b>)) => t<('a, 'b)>
 include Or_error_boths.S with type t<'a> := t<'a>
