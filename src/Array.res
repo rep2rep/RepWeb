@@ -19,7 +19,8 @@ let joinWith = Js.Array2.joinWith
 let filter = Js.Array2.filter
 let find = Js.Array2.find
 let includes = Js.Array2.includes
-let flatMap = (t, f) => Js.Array2.map(t, f)->concatMany
+let flatMap = (t, f) => map(t, f)->concatMany
+let flatMapWithIndex = (t, f) => mapWithIndex(t, f)->concatMany
 let mapPartial = (t, f) =>
   t->reduce([], (arr, x) =>
     switch f(x) {
