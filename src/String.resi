@@ -10,3 +10,4 @@ let fromJson: Js.Json.t => Or_error.t<string>
 let approximateEmWidth: string => float
 
 module Map: module type of Belt.Map.String
+module Set: module type of Belt.Set.String

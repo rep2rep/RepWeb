@@ -1,6 +1,7 @@
 include Js.String2
 
 module Map = Belt.Map.String
+module Set = Belt.Set.String
 
 let t_rpc = Rpc.Datatype.string_
 
