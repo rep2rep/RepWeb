@@ -138,10 +138,11 @@ module Datatype = {
 
   let float_ = {
     reader: buffer => {
-      Js.TypedArray2.Uint8Array.reverseInPlace(buffer)
-      ->Js.TypedArray2.Uint8Array.buffer
-      ->Js.TypedArray2.Float64Array.fromBuffer
-      ->Js.TypedArray2.Float64Array.unsafe_get(0)
+      let b2 = buffer->Js.TypedArray2.Uint8Array.copy
+      Js.TypedArray2.Uint8Array.reverseInPlace(b2)->ignore
+      let b = b2->Js.TypedArray2.Uint8Array.buffer
+      let f = Js.TypedArray2.Float64Array.fromBuffer(b)
+      f->Js.TypedArray2.Float64Array.unsafe_get(0)
     },
     writer: f => {
       let b = Js.TypedArray2.Float64Array.fromLength(1)
