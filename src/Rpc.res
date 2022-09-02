@@ -550,9 +550,10 @@ module Response = {
 type t = {
   host: string,
   port: int,
+  path: option<string>
 }
 
-let create = (host, port) => {host: host, port: port}
+let create = (~host, ~port, ~path) => {host: host, port: port, path: path}
 
 external toBuffer: data => Fetch.bufferSource = "%identity"
 external ofBuffer_ext: Fetch.arrayBuffer => Js.TypedArray2.ArrayBuffer.t = "%identity"
@@ -562,7 +563,7 @@ let require = (service, endpoint, param_type, return_type) => {
   param => {
     let param_bytes = Datatype.write(param_type, param)
     Fetch.fetchWithInit(
-      "http://" ++ service.host ++ ":" ++ Belt.Int.toString(service.port) ++ "/" ++ endpoint,
+      "http://" ++ service.host ++ ":" ++ Belt.Int.toString(service.port) ++ service.path->Belt.Option.getWithDefault("") ++ "/" ++ endpoint,
       Fetch.RequestInit.make(
         ~method_=Post,
         ~headers=Fetch.HeadersInit.make({

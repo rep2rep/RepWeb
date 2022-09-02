@@ -91,5 +91,5 @@ module Response: {
 
 type t
 
-let create: (string, int) => t
+let create: (~host:string, ~port:int, ~path:option<string>) => t
 let require: (t, string, Datatype.t<'a>, Datatype.t<'b>, 'a) => Response.t<'b>
