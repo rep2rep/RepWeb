@@ -14,16 +14,25 @@ let six = BigInt0.fromInt(6)
 let thirtytwo = BigInt0.fromInt(32)
 let rnd = BigInt0.fromInt(2654435769)
 
-let merge = (t1, t2) => BigInt0.bitxor(t1, t2->BigInt0.add(rnd)->BigInt0.add(BigInt0.bitshiftleft(t1, six))->BigInt0.add(BigInt0.bitshiftright(t1, two)))
-let combine = ts =>
-  ts->Js.Array2.reduce(merge, BigInt0.zero)
+let merge = (t1, t2) =>
+  BigInt0.bitxor(
+    t1,
+    t2
+    ->BigInt0.add(rnd)
+    ->BigInt0.add(BigInt0.bitshiftleft(t1, six))
+    ->BigInt0.add(BigInt0.bitshiftright(t1, two)),
+  )
+let combine = ts => ts->Js.Array2.reduce(merge, BigInt0.zero)
 
 let s_const = create()
 let fromString = s =>
   s
   ->Js.String2.split("")
   ->Js.Array2.reduce(
-    (hash, chr) => hash->BigInt0.mul(thirtytwo)->BigInt0.add( chr->Js.String2.charCodeAt(0)->Belt.Int.fromFloat->BigInt0.fromInt),
+    (hash, chr) =>
+      hash
+      ->BigInt0.mul(thirtytwo)
+      ->BigInt0.add(chr->Js.String2.charCodeAt(0)->Belt.Int.fromFloat->BigInt0.fromInt),
     s_const,
   )
 

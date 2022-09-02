@@ -550,7 +550,7 @@ module Response = {
 type t = {
   host: string,
   port: int,
-  path: option<string>
+  path: option<string>,
 }
 
 let create = (~host, ~port, ~path) => {host: host, port: port, path: path}
@@ -563,7 +563,13 @@ let require = (service, endpoint, param_type, return_type) => {
   param => {
     let param_bytes = Datatype.write(param_type, param)
     Fetch.fetchWithInit(
-      "http://" ++ service.host ++ ":" ++ Belt.Int.toString(service.port) ++ service.path->Belt.Option.getWithDefault("") ++ "/" ++ endpoint,
+      "http://" ++
+      service.host ++
+      ":" ++
+      Belt.Int.toString(service.port) ++
+      service.path->Belt.Option.getWithDefault("") ++
+      "/" ++
+      endpoint,
       Fetch.RequestInit.make(
         ~method_=Post,
         ~headers=Fetch.HeadersInit.make({
