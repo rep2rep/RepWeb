@@ -58,6 +58,7 @@ module Set = {
   let remove = Belt.Set.remove
   let union = Belt.Set.union
   let intersect = Belt.Set.intersect
+  let diff = Belt.Set.diff
   let size = Belt.Set.size
   let subset = Belt.Set.subset
   let toList = Belt.Set.toList

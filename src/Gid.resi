@@ -28,6 +28,7 @@ module Set: {
   let remove: (t, elt) => t
   let union: (t, t) => t
   let intersect: (t, t) => t
+  let diff: (t, t) => t
   let subset: (t, t) => bool
   let size: t => int
   let toList: t => list<elt>
