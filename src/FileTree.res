@@ -105,6 +105,14 @@ module Path = {
 
   let root = []
   let extend = (t, id) => Array.concat(t, [id])
+
+  module Stable = {
+    module V1 = {
+      type t = t
+      let toJson = Array.toJson(_, Gid.toJson)
+      let fromJson = Array.fromJson(_, Gid.fromJson)
+    }
+  }
 }
 
 module FileOrFolder = {

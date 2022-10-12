@@ -7,6 +7,14 @@ module Path: {
 
   let root: t
   let extend: (t, Gid.t) => t
+
+  module Stable: {
+    module V1: {
+      type t = t
+      let toJson: t => Js.Json.t
+      let fromJson: Js.Json.t => Or_error.t<t>
+    }
+  }
 }
 
 let empty: unit => t<'a>
