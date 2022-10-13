@@ -5,6 +5,7 @@ module Separator = {
       style={ReactDOM.Style.make(
         ~display="inline-block",
         ~width="1pt",
+        ~minWidth="1pt",
         ~height="2.5ex",
         ~margin="0 0.5em",
         ~background="#ddd",
