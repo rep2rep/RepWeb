@@ -10,3 +10,5 @@ let set = (t, v) =>
 
 let get = t => t.contents
 let getExn = t => get(t)->Option.getExn
+
+let isSet = t => t.contents !== None
