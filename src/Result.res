@@ -1,5 +1,21 @@
 include Belt.Result
 
+let t_rpc = (a_rpc, b_rpc) => {
+  let name = "(" ++ Rpc.Datatype.name(a_rpc) ++ ", " ++ Rpc.Datatype.name(b_rpc) ++ ") Result.t"
+  let underlying = Rpc.Datatype.either2_(a_rpc, b_rpc)
+  let fromEither = e =>
+    switch e {
+    | Rpc.Datatype.Either2.FST(a) => Ok(a)
+    | Rpc.Datatype.Either2.SND(b) => Error(b)
+    }
+  let toEither = t =>
+    switch t {
+    | Ok(a) => Rpc.Datatype.Either2.FST(a)
+    | Error(b) => Rpc.Datatype.Either2.SND(b)
+    }
+  underlying->Rpc.Datatype.convert(name, fromEither, toEither)
+}
+
 let mapError = (t, f) =>
   switch t {
   | Ok(a) => Ok(a)

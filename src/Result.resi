@@ -1,5 +1,7 @@
 include module type of Belt.Result
 
+let t_rpc: (Rpc.Datatype.t<'a>, Rpc.Datatype.t<'b>) => Rpc.Datatype.t<t<'a, 'b>>
+
 let mapError: (t<'a, 'b>, 'b => 'c) => t<'a, 'c>
 
 let fromOption: (option<'a>, unit => 'b) => t<'a, 'b>
