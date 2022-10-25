@@ -45,3 +45,9 @@ let fromJson = (json, decode) =>
   } else {
     decode(json)->Or_error.map(x => Some(x))
   }
+
+let toString = (t, stringify) =>
+  switch t {
+  | None => "None"
+  | Some(x) => "Some(" ++ stringify(x) ++ ")"
+  }

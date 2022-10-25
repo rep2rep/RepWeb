@@ -7,6 +7,8 @@ let hash: (option<'a>, 'a => Hash.t) => Hash.t
 let toJson: (option<'a>, 'a => Js.Json.t) => Js.Json.t
 let fromJson: (Js.Json.t, Js.Json.t => Or_error.t<'a>) => Or_error.t<option<'a>>
 
+let toString: (option<'a>, 'a => string) => string
+
 let some: 'a => option<'a>
 let flatten: option<option<'a>> => option<'a>
 let iter: (option<'a>, 'a => unit) => unit
