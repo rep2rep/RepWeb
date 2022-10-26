@@ -96,7 +96,7 @@ let toString_ = (t, includeTags) =>
       }
     ),
   )
-let toString = t => toString_(t, false)
+let toString = t => toString_(t, false)->Js.String2.trim
 let toStringWithTags = t => toString_(t, true)
 let fromString = s => [MessageOrTag.Message(Message.fromString(s))]
 let fromStrings = ss => [MessageOrTag.Message(Js.String2.concatMany("", ss)->Message.fromString)]
