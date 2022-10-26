@@ -9,10 +9,12 @@ let create = () => {
   value
 }
 
+let toString = BigInt0.toString(_, ~base=16)
+
 let two = BigInt0.fromInt(2)
 let six = BigInt0.fromInt(6)
 let thirtytwo = BigInt0.fromInt(32)
-let rnd = BigInt0.fromInt(2654435769)
+let rnd = BigInt0.fromString("2654435769")
 
 let merge = (t1, t2) =>
   BigInt0.bitxor(

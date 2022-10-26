@@ -1,5 +1,7 @@
 type t
 
+let toString: t => string
+
 let unique: unit => t
 let combine: array<t> => t
 
