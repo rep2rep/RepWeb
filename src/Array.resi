@@ -7,6 +7,7 @@ let hash: (array<'a>, 'a => Hash.t) => Hash.t
 let toJson: (array<'a>, 'a => Js.Json.t) => Js.Json.t
 let fromJson: (Js.Json.t, Js.Json.t => Or_error.t<'a>) => Or_error.t<array<'a>>
 
+let singleton: 'a => array<'a>
 let joinWith: (array<string>, string) => string
 let filter: (array<'a>, 'a => bool) => array<'a>
 let find: (array<'a>, 'a => bool) => option<'a>

@@ -15,6 +15,7 @@ let fromJson = (j, decode) =>
     )
   )
 
+let singleton = a => [a]
 let joinWith = Js.Array2.joinWith
 let filter = Js.Array2.filter
 let find = Js.Array2.find
