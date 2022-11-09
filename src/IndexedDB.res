@@ -28,6 +28,7 @@ module Internal = {
 
     @set external onError: (t<'a>, event<'a> => unit) => unit = "onerror"
     @set external onSuccess: (t<'a>, event<'a> => unit) => unit = "onsuccess"
+    @get external error: t<'a> => 'err = "error"
   }
 
   type transact
@@ -80,7 +81,10 @@ module Internal = {
 let open_ = (~name, ~version, ~onUpgradeNeeded) =>
   Promise.make((resolve, reject) => {
     let result = indexedDB->Internal.open_(name, version)
-    result->Internal.IDBOpenRequest.onError(e => reject(. e.target.errorCode))
+    result->Internal.IDBOpenRequest.onError(e => {
+      Js.Console.log2("IDB Open", e)
+      reject(. e.target.errorCode)
+    })
     result->Internal.IDBOpenRequest.onSuccess(e => resolve(. e.target.result))
     result->Internal.IDBOpenRequest.onUpgradeNeeded(e => e.target.result->onUpgradeNeeded)
   })
@@ -96,7 +100,10 @@ let add = (t, ~store, ~key, data) =>
       ->Internal.transaction([store], #readwrite)
       ->Internal.Transaction.objectStore(store)
       ->Internal.ObjectStore.add(data, Some(key))
-    result->Internal.IDBRequest.onError(e => reject(. e.target.errorCode))
+    result->Internal.IDBRequest.onError(e => {
+      Js.Console.log3("IDB Add", e, result)
+      reject(. Internal.IDBRequest.error(result))
+    })
     result->Internal.IDBRequest.onSuccess(e => resolve(. e.target.result))
   })
 
@@ -107,7 +114,10 @@ let put = (t, ~store, ~key, data) =>
       ->Internal.transaction([store], #readwrite)
       ->Internal.Transaction.objectStore(store)
       ->Internal.ObjectStore.put(data, Some(key))
-    result->Internal.IDBRequest.onError(e => reject(. e.target.errorCode))
+    result->Internal.IDBRequest.onError(e => {
+      Js.Console.log2("IDB Put", e)
+      reject(. Internal.IDBRequest.error(result))
+    })
     result->Internal.IDBRequest.onSuccess(e => resolve(. e.target.result))
   })
 
@@ -118,7 +128,10 @@ let get = (t, ~store, ~key) =>
       ->Internal.transaction([store], #readwrite)
       ->Internal.Transaction.objectStore(store)
       ->Internal.ObjectStore.get(key)
-    result->Internal.IDBRequest.onError(e => reject(. e.target.errorCode))
+    result->Internal.IDBRequest.onError(e => {
+      Js.Console.log2("IDB Get", e)
+      reject(. Internal.IDBRequest.error(result))
+    })
     result->Internal.IDBRequest.onSuccess(e => resolve(. e.target.result))
   })
 
@@ -129,6 +142,9 @@ let delete = (t, ~store, ~key) =>
       ->Internal.transaction([store], #readwrite)
       ->Internal.Transaction.objectStore(store)
       ->Internal.ObjectStore.delete(key)
-    result->Internal.IDBRequest.onError(e => reject(. e.target.errorCode))
+    result->Internal.IDBRequest.onError(e => {
+      Js.Console.log2("IDB Delete", e)
+      reject(. Internal.IDBRequest.error(result))
+    })
     result->Internal.IDBRequest.onSuccess(e => resolve(. e.target.result))
   })
