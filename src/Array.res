@@ -16,6 +16,11 @@ let fromJson = (j, decode) =>
   )
 
 let singleton = a => [a]
+@new external _makeArrayOfSize: int => array<'a> = "Array"
+let repeat = (a, n) => {
+  let t = _makeArrayOfSize(n)
+  Js.Array2.fillInPlace(t, a)
+}
 let joinWith = Js.Array2.joinWith
 let filter = Js.Array2.filter
 let find = Js.Array2.find
