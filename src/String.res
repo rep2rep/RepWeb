@@ -11,6 +11,39 @@ let toJson = Js.Json.string
 let fromJson = j =>
   j->Js.Json.decodeString->Or_error.fromOption_ss(["Not a JSON string: ", make(j)])
 
+let repeat = (t, n) =>
+  if n <= 0 {
+    ""
+  } else {
+    Array.joinWith(Array.repeat(t, n), "")
+  }
+
+let padLeft = (t, ~length as l, ~fill) => {
+  let currLen = length(t)
+  let padBy = l - currLen
+  if padBy <= 0 {
+    t
+  } else {
+    let fillLen = length(fill)
+    let fillReps = padBy / fillLen
+    let fillSpill = mod(padBy, fillLen)
+    repeat(fill, fillReps) ++ substrAtMost(fill, ~from=0, ~length=fillSpill) ++ t
+  }
+}
+
+let padRight = (t, ~length as l, ~fill) => {
+  let currLen = length(t)
+  let padBy = l - currLen
+  if padBy <= 0 {
+    t
+  } else {
+    let fillLen = length(fill)
+    let fillReps = padBy / fillLen
+    let fillSpill = mod(padBy, fillLen)
+    t ++ repeat(fill, fillReps) ++ substrAtMost(fill, ~from=0, ~length=fillSpill)
+  }
+}
+
 let approxWidths = Belt.Map.String.fromArray([
   (" ", 0.3),
   ("!", 0.33),
