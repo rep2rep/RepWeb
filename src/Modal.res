@@ -49,13 +49,14 @@ let make = (~handle as (fill, closeModal), ~style=?) => {
   let containerStyle =
     ReactDOM.Style.make(
       ~background="white",
-      ~borderRadius="5px",
+      ~borderRadius="3px",
+      ~boxShadow="0px 5px 20px rgba(0,0,0,0.5)",
       ~padding="0.5rem",
       ~position="fixed",
       ~top="50vh",
       ~left="50vw",
       ~transform="translate(-50%, -50%)",
-      ~width="300px",
+      ~width="400px",
       ~maxWidth="100vw",
       ~height="150px",
       ~maxHeight="100vh",
