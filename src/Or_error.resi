@@ -19,6 +19,8 @@ let fromBool: (bool, Error.t) => t<unit>
 let fromBool_s: (bool, string) => t<unit>
 let fromBool_ss: (bool, array<string>) => t<unit>
 
+let toResult: t<'a> => Result.t<'a, Error.t>
+
 let toString: (t<'a>, 'a => string) => string
 
 let create: 'a => t<'a>
