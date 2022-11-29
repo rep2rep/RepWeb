@@ -518,6 +518,8 @@ module Datatype = {
 module Response = {
   type t<'a> = Promise.t<option<'a>>
 
+  let create = a => Promise.resolve(Some(a))
+
   let upon = (t, f) =>
     t
     ->Promise.thenResolve(t =>

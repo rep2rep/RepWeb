@@ -82,6 +82,7 @@ module Datatype: {
 module Response: {
   type t<'a> = Promise.t<option<'a>>
 
+  let create: 'a => t<'a>
   let upon: (t<'a>, 'a => unit) => unit
   let map: (t<'a>, 'a => 'b) => t<'b>
   let flatMap: (t<'a>, 'a => t<'b>) => t<'b>
