@@ -4,6 +4,9 @@ let t_rpc: (Rpc.Datatype.t<'a>, Rpc.Datatype.t<'b>) => Rpc.Datatype.t<t<'a, 'b>>
 
 let mapError: (t<'a, 'b>, 'b => 'c) => t<'a, 'c>
 
+let forEach: (t<'a, 'b>, 'a => unit) => unit
+let forEachError: (t<'a, 'b>, 'b => unit) => unit
+
 let fromOption: (option<'a>, unit => 'b) => t<'a, 'b>
 let toOption: t<'a, _> => option<'a>
 

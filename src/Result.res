@@ -22,6 +22,18 @@ let mapError = (t, f) =>
   | Error(b) => Error(f(b))
   }
 
+let forEach = (t, f) =>
+  switch t {
+  | Ok(a) => f(a)
+  | Error(_) => ()
+  }
+
+let forEachError = (t, f) =>
+  switch t {
+  | Ok(_) => ()
+  | Error(e) => f(e)
+  }
+
 let fromOption = (opt, err) =>
   switch opt {
   | Some(a) => Ok(a)
