@@ -42,9 +42,7 @@ module Make: (Request: Request_Intf, Response: Response_Intf) =>
   @new external create: string => t = "Worker"
   @send external addEventListener: (t, string, message => unit) => unit = "addEventListener"
   let listen = (t, callback) =>
-    addEventListener(t, "message", msg =>
-      msg->data->Response.fromJson->Or_error.iter(callback)
-    )
+    addEventListener(t, "message", msg => msg->data->Response.fromJson->Or_error.iter(callback))
   @send external postMessage: (t, Js.Json.t) => unit = "postMessage"
   let post = (t, request) => {
     let req = Request.toJson(request)

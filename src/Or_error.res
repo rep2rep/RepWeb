@@ -142,10 +142,11 @@ let fromBool = (b, err) =>
 let fromBool_s = (opt, err_s) => fromBool(opt, Error.fromString(err_s))
 let fromBool_ss = (opt, err_ss) => fromBool(opt, Error.fromStrings(err_ss))
 
-let toResult = t => switch t {
+let toResult = t =>
+  switch t {
   | Ok(a, _) => Belt.Result.Ok(a)
   | Err(e) => Belt.Result.Error(e)
-}
+  }
 
 let tags_to_json = tags => Js.Json.array(tags->Js.Array2.map(Error.Tag.toJson))
 let tags_from_json = json =>
