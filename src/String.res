@@ -18,6 +18,8 @@ let repeat = (t, n) =>
     Array.joinWith(Array.repeat(t, n), "")
   }
 
+@send external replaceAll: (string, string, string) => string = "replaceAll"
+
 let padLeft = (t, ~length as l, ~fill) => {
   let currLen = length(t)
   let padBy = l - currLen

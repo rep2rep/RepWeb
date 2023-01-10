@@ -11,6 +11,8 @@ let approximateEmWidth: string => float
 
 let repeat: (string, int) => string
 
+let replaceAll: (string, string, string) => string
+
 let padLeft: (string, ~length: int, ~fill: string) => string
 let padRight: (string, ~length: int, ~fill: string) => string
 
